@@ -1,2 +1,0 @@
-GET http://localhost:5000/
-Content-Type: application/javascript
