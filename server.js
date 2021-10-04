@@ -1,6 +1,6 @@
 const { response } = require("express");
 const express = require("express");
-const menu = require('./menu');
+const {MainMenu, Register, SendMoney, withdrawMoney, CheckBalance} = require('./menu');
 const app = express();
 const PORT = process.env.PORT || 5000;
 
@@ -15,7 +15,7 @@ app.post("/", (req, res) => {
 
   if (text == "" && userRegistered == false) {
   console.log("Hitting 1")
-   menu.MainMenu
+   MainMenu()
   }
   else if (userRegistered == false && text != "") {
     console.log("Hitting 2")
@@ -23,7 +23,7 @@ app.post("/", (req, res) => {
     const textArray =  text.split("*");
     switch (textArray[0]) {
       case 1:
-        menu.Register(textArray, phoneNumber);
+        Register(textArray, phoneNumber);
         break;
       default:
         response = "END Invalid choice. Please try again";
@@ -35,13 +35,13 @@ app.post("/", (req, res) => {
     const textArray =  text.split("*");
     switch (textArray[0]) {
       case 1:
-        menu.SendMoney(textArray, sessionId);
+        SendMoney(textArray, sessionId);
         break;
       case 2:
-        menu.WithdrawMoney(textArray);
+        WithdrawMoney(textArray);
         break;
       case 3:
-        menu.CheckBalance(textArray);
+        CheckBalance(textArray);
         break;
       default:
         response = "END Invalid menu\n";
