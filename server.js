@@ -14,10 +14,8 @@ app.post("/", (req, res) => {
   let response = '';
 
   if (text == "" && userRegistered == false) {
-    console.log("Hitting 1")
-   response = `CON What would you like to check
-   1. My account
-   2. My phone number`;
+  console.log("Hitting 1")
+   menu.MainMenu
   }
   else if (userRegistered == false && text != "") {
     console.log("Hitting 2")
@@ -53,7 +51,7 @@ app.post("/", (req, res) => {
   // Send the response back to the API
   res.set("Content-Type: text/plain");
   res.send(response);
-  
+
 });
 app.listen(PORT, () => {
   console.log("Server is running ...");
