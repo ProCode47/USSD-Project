@@ -17,17 +17,12 @@ app.post("/", (req, res) => {
    response = MainMenu()
   }
   else if (userRegistered == false && text != "") {
-    console.log("Hitting 2")
     const textArray = text.split("*");
-    console.log(text)
-    console.log(textArray)
     switch (textArray[0]) {
       case "1":
         response = Register(textArray, phoneNumber);
-
         break;
       case "2":
-        console.log("Bruh")
          response = SendMoney(textArray, sessionId);
           break;
         case "3":
