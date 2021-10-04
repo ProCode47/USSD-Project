@@ -6,7 +6,7 @@ const PORT = process.env.PORT || 5000;
 
 //Configuring Express
 app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
+app.use(express.urlencoded({ extended: false }));
 
 app.post("/", (req, res) => {
   const { sessionId, serviceCode, phoneNumber, text } = req.body;
@@ -49,11 +49,11 @@ app.post("/", (req, res) => {
         response = "END Invalid menu\n";
     }
  
-
-    // Send the response back to the API
-    res.set("Content-Type: text/plain");
-    res.send(response);
   }
+  // Send the response back to the API
+  res.set("Content-Type: text/plain");
+  res.send(response);
+  
 });
 app.listen(PORT, () => {
   console.log("Server is running ...");
