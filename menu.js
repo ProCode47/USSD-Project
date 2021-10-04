@@ -1,14 +1,15 @@
 const menu =  {
     
     MainMenu: () => {
-        return ( response = `CON Welcome to Sure Finance... Nigeria's First Peer-to-Peer Banking App
+         response = `CON Welcome to Sure Finance... Nigeria's First Peer-to-Peer Banking App
             1. Create an Account
             2. Send Money
             3. Deposit Money
             4. Check Balance
-            `)
-       
-            },
+            `;
+        
+        return response
+    },
     Register: (textArray, phoneNumber) => {
         const level = text.length;
         if(level == 1){
