@@ -14,7 +14,7 @@ app.post("/", (req, res) => {
 
   if (text == "" && userRegistered == false) {
   console.log("Hitting 1")
-   reponse = MainMenu()
+   response = MainMenu()
   }
   else if (userRegistered == false && text != "") {
     console.log("Hitting 2")
