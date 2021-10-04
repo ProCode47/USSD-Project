@@ -13,7 +13,7 @@ const menu =  {
     Register: (textArray, phoneNumber) => {
         console.log("hit the register")
         let response = ""
-        const level = text.length;
+        const level = textArray.length;
         if(level == 1){
            return response = "CON Please enter your full name:";
        } else if(level == 2){
