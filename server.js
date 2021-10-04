@@ -43,7 +43,7 @@ app.post("/", (req, res) => {
         CheckBalance(textArray);
         break;
       default:
-        response = "END Invalid menu\n";
+        response = "END Invalid\n";
     }
  
   }
@@ -53,5 +53,5 @@ app.post("/", (req, res) => {
 
 });
 app.listen(PORT, () => {
-  console.log("Server is running ...");
+  console.log(`Server is running on ${PORT}... `);
 });
