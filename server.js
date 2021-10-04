@@ -17,6 +17,7 @@ app.post("/", (req, res) => {
     menu.MainMenu
   }
   else if (userRegistered == false && userText != "") {
+    console.log({userText})
     console.log("hit me2")
 
     const textArray =  userText.split("*");
