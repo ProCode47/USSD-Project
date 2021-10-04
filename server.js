@@ -16,7 +16,7 @@ app.post("/", (req, res) => {
     menu.MainMenu
   }
   else if (userRegistered == false) {
-    textArray = split("*", userText);
+    const textArray =  userText.split("*");
     switch (textArray[0]) {
       case 1:
         menu.Register(textArray, phoneNumber);
@@ -26,7 +26,7 @@ app.post("/", (req, res) => {
     }
   }
   else {
-    textArray = split("*", userText);
+    const textArray =  userText.split("*");
     switch (textArray[0]) {
       case 1:
         menu.SendMoney(textArray, sessionId);
@@ -35,7 +35,7 @@ app.post("/", (req, res) => {
         menu.WithdrawMoney(textArray);
         break;
       case 3:
-        menu.checkBalance(textArray);
+        menu.CheckBalance(textArray);
         break;
       default:
         response = "END Invalid menu\n";

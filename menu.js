@@ -31,7 +31,17 @@ const menu =  {
 
         
         
+    },
+    SendMoney:(textArray) => {
+        response = "END Coming Soon...";
+    },
+    withdrawMoney:(textArray)=>{
+        response = "END Coming Soon...";
+    },
+    CheckBalance:(textArray)=>{
+        response = "END Coming Soon...";
     }
+
 }
 
 
