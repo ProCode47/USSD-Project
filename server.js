@@ -10,12 +10,15 @@ app.use(express.urlencoded({ extended: true }));
 
 app.post("/", (req, res) => {
   const { sessionId, serviceCode, phoneNumber, userText } = req.body;
-  const userRegistered = false
+  const userRegistered = false;
 
   if (userText == "" && userRegistered == false) {
+    console.log("hit me")
     menu.MainMenu
   }
-  else if (userRegistered == false) {
+  else if (userRegistered == false && userText != "") {
+    console.log("hit me2")
+
     const textArray =  userText.split("*");
     switch (textArray[0]) {
       case 1:
@@ -26,6 +29,8 @@ app.post("/", (req, res) => {
     }
   }
   else {
+    console.log("hit me3")
+
     const textArray =  userText.split("*");
     switch (textArray[0]) {
       case 1:
