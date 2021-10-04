@@ -1,3 +1,5 @@
+const { response } = require("express");
+
 const menu =  {
     
     MainMenu: (userText) => {
@@ -7,7 +9,7 @@ const menu =  {
             3. Deposit Money
             4. Check Balance
             `;
-            res.send(response);
+        return response;
     },
     Register: (textArray, phoneNumber) => {
         const level = text.length;
