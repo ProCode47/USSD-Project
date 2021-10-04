@@ -14,12 +14,17 @@ const menu =  {
         console.log("hit the register")
         let response = ""
         const level = textArray.length;
-        if(level == 1){
-           return response = "CON Please enter your full name:";
-       } else if(level == 2){
-           return response = "CON Please choose a PIN:";
+        console.log(level)
+
+        if (level == 1) {
+        let response = "CON Please enter your full name:"
+        return response 
+        } else if (level == 2) {
+            let response = "CON Please choose a PIN:"
+        return response 
        }else if(level == 3){
-        return  response = "CON Please re-enter your PIN:";
+        let response = "CON Please confirm your PIN:"
+        return response
        }else if(level == 4){
           const fullName =textArray[1];
           const  pin = textArray[2];

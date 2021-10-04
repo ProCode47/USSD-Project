@@ -23,16 +23,18 @@ app.post("/", (req, res) => {
     console.log(textArray)
     switch (textArray[0]) {
       case "1":
-        Register(textArray, phoneNumber);
+        response = Register(textArray, phoneNumber);
+
         break;
-        case "2":
-          SendMoney(textArray, sessionId);
+      case "2":
+        console.log("Bruh")
+         response = SendMoney(textArray, sessionId);
           break;
         case "3":
-          WithdrawMoney(textArray);
+         response = WithdrawMoney(textArray);
           break;
         case "4":
-          CheckBalance(textArray);
+         response = CheckBalance(textArray);
           break;
       default:
         response = "END Invalid choice. Please try again";
