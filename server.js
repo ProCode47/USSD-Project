@@ -1,6 +1,5 @@
-const { response } = require("express");
 const express = require("express");
-const {MainMenu, Register, SendMoney, withdrawMoney, CheckBalance} = require('./menu');
+const {MainMenu, Register, SendMoney, WithdrawMoney, CheckBalance} = require('./menu');
 const app = express();
 const PORT = process.env.PORT || 5000;
 
