@@ -22,32 +22,24 @@ app.post("/", (req, res) => {
     console.log(text)
     console.log(textArray)
     switch (textArray[0]) {
-      case 1:
+      case "1":
         Register(textArray, phoneNumber);
         break;
+        case "2":
+          SendMoney(textArray, sessionId);
+          break;
+        case "3":
+          WithdrawMoney(textArray);
+          break;
+        case "4":
+          CheckBalance(textArray);
+          break;
       default:
         response = "END Invalid choice. Please try again";
     }
   }
-  else {
-    console.log("Hitting 3")
 
-    const textArray =  text.split("*");
-    switch (textArray[0]) {
-      case 1:
-        SendMoney(textArray, sessionId);
-        break;
-      case 2:
-        WithdrawMoney(textArray);
-        break;
-      case 3:
-        CheckBalance(textArray);
-        break;
-      default:
-        response = "END Invalid\n";
-    }
- 
-  }
+
   // Send the response back to the API
   res.set("Content-Type: text/plain");
   res.send(response);

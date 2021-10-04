@@ -11,6 +11,7 @@ const menu =  {
         return response
     },
     Register: (textArray, phoneNumber) => {
+        console.log("hit the register")
         let response = ""
         const level = text.length;
         if(level == 1){
