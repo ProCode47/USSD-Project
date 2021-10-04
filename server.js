@@ -11,16 +11,12 @@ app.use(express.urlencoded({ extended: true }));
 app.post("/", (req, res) => {
   const { sessionId, serviceCode, phoneNumber, text } = req.body;
   const userRegistered = false;
+  let response = '';
 
   if (text == "" && userRegistered == false) {
-    console.log("hit me")
-    // menu.MainMenu;
-    response = `CON Welcome to Sure Finance... Nigeria's First Peer-to-Peer Banking App
-    1. Create an Account
-    2. Send Money
-    3. Deposit Money
-    4. Check Balance
-    `;
+   response = `CON What would you like to check
+   1. My account
+   2. My phone number`;
   }
   else if (userRegistered == false && text != "") {
     const textArray =  text.split("*");
