@@ -14,11 +14,14 @@ app.post("/", (req, res) => {
   let response = '';
 
   if (text == "" && userRegistered == false) {
+    console.log("Hitting 1")
    response = `CON What would you like to check
    1. My account
    2. My phone number`;
   }
   else if (userRegistered == false && text != "") {
+    console.log("Hitting 2")
+
     const textArray =  text.split("*");
     switch (textArray[0]) {
       case 1:
@@ -29,7 +32,7 @@ app.post("/", (req, res) => {
     }
   }
   else {
-    console.log("hit me3")
+    console.log("Hitting 3")
 
     const textArray =  text.split("*");
     switch (textArray[0]) {
