@@ -9,18 +9,17 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 app.post("/", (req, res) => {
-  const { sessionId, serviceCode, phoneNumber, userText } = req.body;
+  const { sessionId, serviceCode, phoneNumber, text } = req.body;
   const userRegistered = false;
 
-  if (userText == "" && userRegistered == false) {
+  if (text == "" && userRegistered == false) {
     console.log("hit me")
     menu.MainMenu
   }
-  else if (userRegistered == false && userText != "") {
-    console.log({userText})
+  else if (userRegistered == false && text != "") {
     console.log("hit me2")
 
-    const textArray =  userText.split("*");
+    const textArray =  text.split("*");
     switch (textArray[0]) {
       case 1:
         menu.Register(textArray, phoneNumber);
@@ -32,7 +31,7 @@ app.post("/", (req, res) => {
   else {
     console.log("hit me3")
 
-    const textArray =  userText.split("*");
+    const textArray =  text.split("*");
     switch (textArray[0]) {
       case 1:
         menu.SendMoney(textArray, sessionId);
