@@ -12,7 +12,7 @@ app.post("/", (req, res) => {
   const { sessionId, serviceCode, phoneNumber, userText } = req.body;
   const userRegistered = false
 
-  if (text == "" && userRegistered == false) {
+  if (userText == "" && userRegistered == false) {
     menu.MainMenu
   }
   else if (userRegistered == false) {
