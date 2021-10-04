@@ -15,7 +15,7 @@ const menu = {
       let response = "CON You're about to create an account with Sure Finance PLC. Please endeavour that all the details you give are reliable. Please state your full name:";
       return response;
     } else if (level == 2) {
-        let response = `CON This phone number will be used as your account number for transfers, withdrawals and deposits too
+        let response = `CON This phone number will be used as your account number for transfers, withdrawals and deposits
         1. Agree and Continue `;
         return response;
     } else if (level == 3) {
@@ -26,8 +26,8 @@ const menu = {
       return response;
     } else if (level == 5) {
       const fullName = textArray[1];
-      const pin = textArray[2];
-      const confirmPin = textArray[3];
+      const pin = textArray[3];
+      const confirmPin = textArray[4];
       if (pin != confirmPin) {
         return (response = "END Your pins do not match. Please try again");
       } else {
@@ -37,14 +37,14 @@ const menu = {
     }
   },
     SendMoney: (textArray) => {
-    let response = "END Coming Soon...";
+    let response = "END This service will be available soon...";
     return response 
   },
-  withdrawMoney: (textArray) => {
-    let response = "END Coming Soon...";
+  WithdrawMoney: (textArray) => {
+    let response = "END This service will be available soon...";
     return response   },
   CheckBalance: (textArray) => {
-    let response = "END Coming Soon...";
+    let response = "END This service will be available soon...";
     return response   },
 };
 
