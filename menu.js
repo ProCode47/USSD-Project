@@ -9,6 +9,8 @@ const menu =  {
             3. Deposit Money
             4. Check Balance
             `;
+        
+        return response
     },
     Register: (textArray, phoneNumber) => {
         const level = text.length;
