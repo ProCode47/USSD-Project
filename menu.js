@@ -11,22 +11,23 @@ const menu =  {
         return response
     },
     Register: (textArray, phoneNumber) => {
+        let response = ""
         const level = text.length;
         if(level == 1){
-            response = "CON Please enter your full name:";
+           return response = "CON Please enter your full name:";
        } else if(level == 2){
-            response = "CON Please choose a PIN:";
+           return response = "CON Please choose a PIN:";
        }else if(level == 3){
-            response = "CON Please re-enter your PIN:";
+        return  response = "CON Please re-enter your PIN:";
        }else if(level == 4){
           const fullName =textArray[1];
           const  pin = textArray[2];
            const confirmPin =textArray[3];
             if(pin != confirmPin){
-                response = "END Your pins do not match. Please try again";
+                return  response = "END Your pins do not match. Please try again";
             }else{
                 //connect to DB and register a user. 
-                response = "END You have been registered";
+                return  response = "END You have been registered";
             }
        }
 

@@ -18,8 +18,9 @@ app.post("/", (req, res) => {
   }
   else if (userRegistered == false && text != "") {
     console.log("Hitting 2")
-
-    const textArray =  text.split("*");
+    const textArray = text.split("*");
+    console.log(text)
+    console.log(textArray)
     switch (textArray[0]) {
       case 1:
         Register(textArray, phoneNumber);
