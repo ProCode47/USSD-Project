@@ -9,6 +9,7 @@ app.use(express.urlencoded({ extended: false }));
 
 app.post("/", (req, res) => {
   const { sessionId, serviceCode, phoneNumber, text } = req.body;
+  //TODO check if user is registred via phone number
   const userRegistered = false;
   let response = '';
 
