@@ -11,9 +11,10 @@
   "author": "Iloenyenwa Victor",
   "license": "ISC",
   "dependencies": {
+    "bcrypt": "^5.0.1",
     "cors": "^2.8.5",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
-    "mongoose": "^5.10.17"
+    "mongoose": "^6.0.9"
   }
 }

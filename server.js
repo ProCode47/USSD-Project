@@ -20,13 +20,12 @@ mongoose
   .connect(connectionString, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
-    useCreateIndex: true,
-    useFindAndModify: false,
   })
   .then((res) => {
     console.log("MongoDB Running Successfully");
   })
   .catch((err) => {
+    console.log({err})
     console.log("MongoDB not Connected ");
   });
 
