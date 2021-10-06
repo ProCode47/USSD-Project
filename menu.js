@@ -11,8 +11,7 @@ const menu = {
     return response;
   },
   unregisteredMenu: () => {
-    const response = `CON Welcome to Aza Mobile Finance.
-    Nigeria's First Peer-to-Peer Banking Service.
+    const response = `CON Welcome to Aza Mobile Finance. The First Peer-to-Peer Banking Service in Nigeria.
             1. Register
             `;
 

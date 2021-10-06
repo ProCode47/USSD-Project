@@ -55,7 +55,7 @@ app.post("/", (req, res) => {
   else if ( text == "" && userRegistered == false ) {
     response = unregisteredMenu()
   }
-  else if (userRegistered == false) {
+  else if ( text != "" && userRegistered == false ) {
     const textArray = text.split("*");
     switch(textArray[0]){
         case 1: 
