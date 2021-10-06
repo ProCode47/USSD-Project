@@ -31,17 +31,16 @@ mongoose
 
 
 app.post("/", (req, res) => {
-  let userName = "";
+  var userName = "";
+  var userRegistered = false;
   let response = '';
   const { sessionId, serviceCode, phoneNumber, text } = req.body;
-  let userRegistered = "";
   User.findOne({ number: phoneNumber })
     .then((user) => {
       if (!user) {
         userRegistered = false;
       } else {
         userName = user.name;
-        console.log(userName)
         userRegistered = true;
     }
     })
