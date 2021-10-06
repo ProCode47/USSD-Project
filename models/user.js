@@ -6,7 +6,7 @@ const UserSchema = mongoose.Schema({
     required: true,
   },
   number: {
-    type: Number,
+    type: String,
     required: true,
   },
   pin: {
