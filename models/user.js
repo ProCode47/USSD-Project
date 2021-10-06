@@ -10,7 +10,7 @@ const UserSchema = mongoose.Schema({
     required: true,
   },
   pin: {
-    type: Number,
+    type: String,
     required:true
   }
   
