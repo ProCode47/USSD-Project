@@ -36,7 +36,7 @@ const menu = {
     } else if (level == 5) {
       const pin = textArray[3];
       const confirmPin = textArray[4];
-      if (!/[^a-zA-Z]/.test(textArray[1])) {
+      if (/[^a-zA-Z]/.test(textArray[1])) {
         return (response =
           "END Your full name must not consist of any number or symbol. Please try again");
       }
