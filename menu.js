@@ -1,5 +1,5 @@
 const User = require("./models/user");
-
+const bcrypt = require("bcrypt");
 const menu = {
   MainMenu: (userName) => {
     const response = `CON Welcome ${userName}, which action you wish to perform ?
