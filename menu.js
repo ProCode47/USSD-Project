@@ -55,25 +55,26 @@ const menu = {
           number: phoneNumber,
         })
           .then((user) => {
-            if (!user) {
-              bcrypt.hash(userData.pin, 10, (err, hash) => {
-                userData.pin = hash;
-                User.create(userData)
-                  .then((user) => {
-                    console.log("hit registered")
-                    return (response = "END You have been registered");
-                  })
-                  .catch((err) => {
-                    console.log({ err });
-                    console.log("hit error")
-                    return (response = "END An error occurred");
-                  });
-              });
-            } else {
-              console.log("am confused")
-
-              return (response = "END This user has already been registered");
-            }
+            let response = "END Damn"
+            // if (!user) {
+            //   bcrypt.hash(userData.pin, 10, (err, hash) => {
+            //     userData.pin = hash;
+            //     User.create(userData)
+            //       .then((user) => {
+            //         console.log("hit registered")
+            //         return (response = "END You have been registered");
+            //       })
+            //       .catch((err) => {
+            //         console.log({ err });
+            //         console.log("hit error")
+            //         return (response = "END An error occurred");
+            //       });
+            //   });
+            // } else {
+            //   console.log("am confused")
+            //   return (response = "END This user has already been registered");
+            // }
+            return response;
           })
           .catch((err) => {
             console.log("damnd")
