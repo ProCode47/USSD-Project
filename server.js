@@ -1,28 +1,73 @@
 const express = require("express");
-const {MainMenu, Register, SendMoney, WithdrawMoney, CheckBalance} = require('./menu');
+const { MainMenu, Register, SendMoney, WithdrawMoney, CheckBalance, unregisteredMenu } = require('./menu');
+const User = require("./models/user");
+const mongoose = require("mongoose");
+const dotenv = require("dotenv");
+const cors = require("cors")
 const app = express();
 const PORT = process.env.PORT || 5000;
 
 //Configuring Express
+dotenv.config();
+app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
-app.post("/", (req, res) => {
-  const { sessionId, serviceCode, phoneNumber, text } = req.body;
-  //TODO check if user is registred via phone number
-  const userRegistered = false;
-  let response = '';
+const connectionString = process.env.DB_URI;
 
-  if (text == "" && userRegistered == false) {
-  console.log("Hitting 1")
-   response = MainMenu()
+//Configure MongoDB Database
+mongoose
+  .connect(connectionString, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+    useCreateIndex: true,
+    useFindAndModify: false,
+  })
+  .then((res) => {
+    console.log("MongoDB Running Successfully");
+  })
+  .catch((err) => {
+    console.log("MongoDB not Connected ");
+  });
+
+
+app.post("/", (req, res) => {
+  let userRegistered = false;
+  let response = '';
+  const { sessionId, serviceCode, phoneNumber, text } = req.body;
+  User.findOne({
+    number: phoneNumber,
+  })
+    .then((user) => {
+      if (!user) {
+        userRegistered = false;
+      } else {
+        userRegistered = true;
+    }
+    })
+    .catch((err) => {
+    console.log({err})
+  })
+
+  if (text == "" && userRegistered == true) {
+   response = MainMenu(userName)
   }
-  else if (userRegistered == false && text != "") {
+  else if ( text == "" && userRegistered == false ) {
+    response = unregisteredMenu()
+  }
+  else if (userRegistered == false) {
+    const textArray = text.split("*");
+    switch(textArray[0]){
+        case 1: 
+            response = Register(textArray, phoneNumber);
+        break;
+        default:
+            response = "END Invalid choice. Please try again";
+    }
+  }
+  else {
     const textArray = text.split("*");
     switch (textArray[0]) {
-      case "1":
-        response = Register(textArray, phoneNumber);
-        break;
       case "2":
          response = SendMoney(textArray, sessionId);
           break;
