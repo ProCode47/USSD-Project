@@ -31,8 +31,8 @@ mongoose
 
 
 app.post("/", (req, res) => {
-  var userName = "";
-  var userRegistered = false;
+  var userName ;
+  var userRegistered;
   let response = '';
   const { sessionId, serviceCode, phoneNumber, text } = req.body;
   User.findOne({ number: phoneNumber })
