@@ -33,6 +33,7 @@ mongoose
 
 app.post("/", (req, res) => {
   let userRegistered = false;
+  let userName = "";
   let response = '';
   const { sessionId, serviceCode, phoneNumber, text } = req.body;
   User.findOne({
@@ -42,6 +43,7 @@ app.post("/", (req, res) => {
       if (!user) {
         userRegistered = false;
       } else {
+        userName = user.name;
         userRegistered = true;
     }
     })

@@ -40,7 +40,7 @@ const menu = {
         return (response =
           "END Your full name must not consist of any number or symbol. Please try again");
       }
-      else if (pin.length != 5 || !isNaN(pin)) {
+      else if (pin.toString().length == 5 && !isNaN(pin)) {
         return (response =
           "END Your pin does not follow our guidelines. Please try again");
       } else if (pin != confirmPin) {
