@@ -89,11 +89,26 @@ const menu = {
     } else if (level == 3) {
       return (response = "CON Enter your PIN:");
     } else if (level == 4) {
-      //TODO get the name of the receiver via DB
-      receiverMobile = textArray[1];
-      return (response = `CON You're about to send ${textArray[2]} to ${receiverMobile} 
+      User.findOne({
+        number: phoneNumber,
+      })
+        .then((user) => {
+          if (!user) {
+            return (response = "END This receipient does not have an account with Aza Mobile, hence transfers to this number are not eligbile");
+
+          } else {
+            userName = user.name;
+            userRegistered = true;
+            receiverMobile = textArray[1];
+      return (response = `CON You're about to send NGN ${textArray[2]} to ${userName} 
       "1. Confirm
       "2. Cancel `);
+        }
+        })
+        .catch((err) => {
+        console.log({err})
+      })
+      
     } else if (level == 5 && textArray[4] == 1) {
       //check if PIN is correct
       //send the money
