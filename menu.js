@@ -76,7 +76,7 @@ const menu = {
             }
           })
           .catch((err) => {
-            console.log("damn")
+            console.log("damnd")
 
             console.log({ err });
             return (response = "END An error has ocurred");
