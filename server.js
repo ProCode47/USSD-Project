@@ -31,24 +31,23 @@ mongoose
 
 
 app.post("/", (req, res) => {
-  let userRegistered = false;
   let userName = "";
   let response = '';
   const { sessionId, serviceCode, phoneNumber, text } = req.body;
-  User.findOne({
-    number: phoneNumber,
-  })
+  const userRegistered = User.findOne({number: phoneNumber})
     .then((user) => {
       if (!user) {
-        userRegistered = false;
+        return false;
       } else {
         userName = user.name;
-        userRegistered = true;
+        return true;
     }
     })
     .catch((err) => {
     console.log({err})
   })
+
+  console.log(userRegistered)
 
   if (text == "" && userRegistered == true) {
    response = MainMenu(userName)
