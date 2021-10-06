@@ -58,7 +58,7 @@ app.post("/", (req, res) => {
   else if ( text != "" && userRegistered == false ) {
     const textArray = text.split("*");
     switch(textArray[0]){
-        case 1: 
+        case "1": 
             response = Register(textArray, phoneNumber);
         break;
         default:
