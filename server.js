@@ -34,20 +34,25 @@ app.post("/", (req, res) => {
   let userName = "";
   let response = '';
   const { sessionId, serviceCode, phoneNumber, text } = req.body;
-  const userRegistered = User.findOne({number: phoneNumber})
+  let userRegistered = "";
+  User.findOne({ number: phoneNumber })
     .then((user) => {
       if (!user) {
-        return false;
+        userRegistered = false;
       } else {
         userName = user.name;
-        return true;
+        console.log(userName)
+        userRegistered = true;
     }
     })
     .catch((err) => {
     console.log({err})
-  })
-
+    })
+  
+  console.log(userName)
   console.log(userRegistered)
+
+
 
   if (text == "" && userRegistered == true) {
    response = MainMenu(userName)
