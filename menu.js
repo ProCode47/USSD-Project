@@ -95,6 +95,7 @@ const menu = {
       return (response = "CON Enter your PIN:");
     } else if (level == 4) {
       let response = " squid game";
+      let userName = " squid game";
       User.findOne({
         number: phoneNumber,
       })
@@ -104,18 +105,19 @@ const menu = {
 
           } else {
             userName = user.name;
-            userRegistered = true;
             receiverMobile = textArray[1];
       response = `CON You're about to send NGN ${textArray[2]} to ${userName} 
       "1. Confirm
       "2. Cancel `;
-        }
+          }
+          console.log(response)
+          return response
+
         })
         .catch((err) => {
         console.log({err})
         })
-      console.log(response)
-      return response
+    
       
     } else if (level == 5 && textArray[4] == 1) {
       //check if PIN is correct
