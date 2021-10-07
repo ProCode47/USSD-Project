@@ -97,9 +97,10 @@ const menu = {
       async function confirmDetails() {
         let user = await User.findOne({ number: phoneNumber }).name; // wait until the promise resolves (*)
         return user
+        console.log("working")
       }
 
-     return(response = confirmDetails())
+     return(response = confirmDetails().toString())
       // User.findOne({
       //   number: phoneNumber,
       // })
