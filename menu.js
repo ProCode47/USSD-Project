@@ -93,14 +93,13 @@ const menu = {
     } else if (level == 3) {
       return (response = "CON Enter your PIN:");
     } else if (level == 4) {
-      let response = " squid game";
 
       async function confirmDetails() {
         let user = await User.findOne({ number: phoneNumber }).name; // wait until the promise resolves (*)
         return user
       }
 
-      response = confirmDetails()
+     return(response = confirmDetails())
       // User.findOne({
       //   number: phoneNumber,
       // })
