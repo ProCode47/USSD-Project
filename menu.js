@@ -46,6 +46,7 @@ const menu = {
       } else if (pin != confirmPin) {
         return (response = "END Your pins do not match. Please try again");
       } else {
+        let response;
         const userData = {
           name: textArray[1],
           number: phoneNumber,
@@ -55,40 +56,36 @@ const menu = {
           number: phoneNumber,
         })
           .then((user) => {
-            let response = "END Damn"
-            // if (!user) {
-            //   bcrypt.hash(userData.pin, 10, (err, hash) => {
-            //     userData.pin = hash;
-            //     User.create(userData)
-            //       .then((user) => {
-            //         console.log("hit registered")
-            //         return (response = "END You have been registered");
-            //       })
-            //       .catch((err) => {
-            //         console.log({ err });
-            //         console.log("hit error")
-            //         return (response = "END An error occurred");
-            //       });
-            //   });
-            // } else {
-            //   console.log("am confused")
-            //   return (response = "END This user has already been registered");
-            // }
-            return response;
+            if (!user) {
+              bcrypt.hash(userData.pin, 10, (err, hash) => {
+                userData.pin = hash;
+                User.create(userData)
+                  .then((user) => {
+                    response = "END You have been registered";
+                  })
+                  .catch((err) => {
+                    console.log({ err });
+                    console.log("hit error")
+                    response = "END An error occurred";
+                  });
+              });
+            } else {
+              response = "END This user has already been registered";
+            }
           })
           .catch((err) => {
-            console.log("damnd")
-
             console.log({ err });
-            return (response = "END An error has ocurred");
+            response = "END An error has ocurred";
           });
+        
+        return response;
       }
     }
   },
   SendMoney: (textArray) => {
     const level = textArray.length;
-    let receiverMobile = "null";
-    let response = "";
+    let receiverMobile;
+    let response;
     if (level == 1) {
       return (response = "CON Enter mobile number of the receiver:");
     } else if (level == 2) {
@@ -96,25 +93,28 @@ const menu = {
     } else if (level == 3) {
       return (response = "CON Enter your PIN:");
     } else if (level == 4) {
+      let response;
       User.findOne({
         number: phoneNumber,
       })
         .then((user) => {
           if (!user) {
-            return (response = "END This receipient does not have an account with Aza Mobile, hence transfers to this number are not eligbile");
+            response = "END This receipient does not have an account with Aza Mobile, hence transfers to this number are not eligbile";
 
           } else {
             userName = user.name;
             userRegistered = true;
             receiverMobile = textArray[1];
-      return (response = `CON You're about to send NGN ${textArray[2]} to ${userName} 
+      response = `CON You're about to send NGN ${textArray[2]} to ${userName} 
       "1. Confirm
-      "2. Cancel `);
+      "2. Cancel `;
         }
         })
         .catch((err) => {
         console.log({err})
-      })
+        })
+      
+      return response
       
     } else if (level == 5 && textArray[4] == 1) {
       //check if PIN is correct
