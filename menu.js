@@ -78,9 +78,8 @@ const menu = {
             console.log({ err });
             response = "END An error has ocurred";
           });
-        
+        console.log(response)
         return response;
-        console.log({response})
       }
     }
   },
