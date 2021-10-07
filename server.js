@@ -73,7 +73,7 @@ app.post("/", (req, res) => {
         const textArray = text.split("*");
         switch (textArray[0]) {
           case "1":
-            response = SendMoney(textArray, sessionId);
+            response = SendMoney(textArray, phoneNumber);
             break;
           case "2":
             response = WithdrawMoney(textArray);
