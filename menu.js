@@ -83,7 +83,7 @@ const menu = {
       }
     }
   },
-  SendMoney: (textArray,phoneNumber) => {
+  SendMoney: async (textArray,phoneNumber) => {
     const level = textArray.length;
     let receiverMobile;
     let response;
@@ -94,30 +94,26 @@ const menu = {
     } else if (level == 3) {
       return (response = "CON Enter your PIN:");
     } else if (level == 4) {
-      let response = " squid game";
-      let userName = " squid game";
-      User.findOne({
-        number: phoneNumber,
-      })
-        .then((user) => {
-          if (!user) {
-            response = "END This receipient does not have an account with Aza Mobile, hence transfers to this number are not eligbile";
-
-          } else {
+      let response;
+      let userName;
+        try {
+          const user = await user.findOne({ number: phoneNumber });
+          if (user) {
             userName = user.name;
             receiverMobile = textArray[1];
-      response = `CON You're about to send NGN ${textArray[2]} to ${userName} 
-      "1. Confirm
-      "2. Cancel `;
+            response = `CON You're about to send NGN ${textArray[2]} to ${userName} 
+            "1. Confirm
+            "2. Cancel `;
+          } else {
+            response = "END This receipient does not have an account with Aza Mobile, hence transfers to this number are not eligbile";
           }
-          console.log(response)
-          return response
-
-        })
-        .catch((err) => {
-        console.log({err})
-        })
+         
+        } catch (err) {
+          console.log({err})
+      }
+      return response 
     
+      
       
     } else if (level == 5 && textArray[4] == 1) {
       //check if PIN is correct
