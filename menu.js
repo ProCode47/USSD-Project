@@ -39,8 +39,7 @@ const menu = {
       if (/[^a-zA-Z]/.test(textArray[1])) {
         return (response =
           "END Your full name must not consist of any number or symbol. Please try again");
-      }
-      else if (pin.toString().length != 5 && isNaN(pin)) {
+      } else if (pin.toString().length != 5 && isNaN(pin)) {
         return (response =
           "END Your pin does not follow our guidelines. Please try again");
       } else if (pin != confirmPin) {
@@ -61,12 +60,12 @@ const menu = {
                 userData.pin = hash;
                 User.create(userData)
                   .then((user) => {
-                    console.log("hit me")
+                    console.log("hit me");
                     response = "END You have been registered";
                   })
                   .catch((err) => {
                     console.log({ err });
-                    console.log("hit error")
+                    console.log("hit error");
                     response = "END An error occurred";
                   });
               });
@@ -78,12 +77,12 @@ const menu = {
             console.log({ err });
             response = "END An error has ocurred";
           });
-        console.log(response)
+        console.log(response);
         return response;
       }
     }
   },
-  SendMoney: (textArray,phoneNumber) => {
+  SendMoney: (textArray, phoneNumber) => {
     const level = textArray.length;
     let receiverMobile;
     let response;
@@ -95,31 +94,35 @@ const menu = {
       return (response = "CON Enter your PIN:");
     } else if (level == 4) {
       let response = " squid game";
-      let userName = " squid game";
-      User.findOne({
-        number: phoneNumber,
-      })
-        .then(
-      (user) => {
-          if (!user) {
-            response = "END This receipient does not have an account with Aza Mobile, hence transfers to this number are not eligbile";
 
-          } else {
-            userName = user.name;
-            receiverMobile = textArray[1];
-      response = `CON You're about to send NGN ${textArray[2]} to ${userName} 
-      "1. Confirm
-      "2. Cancel `;
-          }
-          console.log(response)
-          return response
+      async function confirmDetails() {
+        let user = await User.findOne({ number: phoneNumber }).name; // wait until the promise resolves (*)
+        return user
+      }
 
-        })
-        .catch((err) => {
-        console.log({err})
-        })
-    
-      
+      response = confirmDetails()
+      // User.findOne({
+      //   number: phoneNumber,
+      // })
+      //   .then(
+      // (user) => {
+      //     if (!user) {
+      //       response = "END This receipient does not have an account with Aza Mobile, hence transfers to this number are not eligbile";
+
+      //     } else {
+      //       userName = user.name;
+      //       receiverMobile = textArray[1];
+      // response = `CON You're about to send NGN ${textArray[2]} to ${userName}
+      // "1. Confirm
+      // "2. Cancel `;
+      //     }
+      //     console.log(response)
+      //     return response
+
+      //   })
+      //   .catch((err) => {
+      //   console.log({err})
+      //   })
     } else if (level == 5 && textArray[4] == 1) {
       //check if PIN is correct
       //send the money
