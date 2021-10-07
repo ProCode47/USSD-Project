@@ -31,17 +31,20 @@ mongoose
 
 
 app.post("/", (req, res) => {
-  var userName ;
-  var userRegistered;
-  let response = '';
+ let userName ;
+ let userRegistered;
+ let response = '';
+
+
   const { sessionId, serviceCode, phoneNumber, text } = req.body;
   User.findOne({ number: phoneNumber })
     .then((user) => {
       if (!user) {
         userRegistered = false;
       } else {
-        userName = user.name;
+        console.log(userName = user.name);
         userRegistered = true;
+        userName = user.name;
     }
     })
     .catch((err) => {
