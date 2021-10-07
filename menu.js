@@ -94,7 +94,7 @@ const menu = {
     } else if (level == 3) {
       return (response = "CON Enter your PIN:");
     } else if (level == 4) {
-      let response;
+      let response = " squid game";
       User.findOne({
         number: phoneNumber,
       })
@@ -114,7 +114,7 @@ const menu = {
         .catch((err) => {
         console.log({err})
         })
-      
+      console.log(response)
       return response
       
     } else if (level == 5 && textArray[4] == 1) {
