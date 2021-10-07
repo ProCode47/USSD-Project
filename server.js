@@ -42,57 +42,60 @@ app.post("/", (req, res) => {
       if (!user) {
         userRegistered = false;
       } else {
-        console.log(userName = user.name);
+
+        // AUTHENTICATION PARAMETERS
+        console.log(userName)
+        console.log(userRegistered)
         userRegistered = true;
         userName = user.name;
+
+        // MAIN LOGIC 
+         
+
+
+
+  if (text == "" && userRegistered == true) {
+    response = MainMenu(userName)
+   }
+   else if ( text == "" && userRegistered == false ) {
+     response = unregisteredMenu()
+   }
+   else if ( text != "" && userRegistered == false ) {
+     const textArray = text.split("*");
+     switch(textArray[0]){
+         case "1": 
+             response = Register(textArray, phoneNumber);
+         break;
+         default:
+             response = "END Invalid choice. Please try again";
+     }
+   }
+   else {
+     const textArray = text.split("*");
+     switch (textArray[0]) {
+       case "2":
+          response = SendMoney(textArray, sessionId);
+           break;
+         case "3":
+          response = WithdrawMoney(textArray);
+           break;
+         case "4":
+          response = CheckBalance(textArray);
+           break;
+       default:
+         response = "END Invalid choice. Please try again";
+     }
+   }
+ 
+ 
+   // Send the response back to the API
+   res.set("Content-Type: text/plain");
+   res.send(response);
     }
     })
     .catch((err) => {
     console.log({err})
     })
-  
-  console.log(userName)
-  console.log(userRegistered)
-
-
-
-  if (text == "" && userRegistered == true) {
-   response = MainMenu(userName)
-  }
-  else if ( text == "" && userRegistered == false ) {
-    response = unregisteredMenu()
-  }
-  else if ( text != "" && userRegistered == false ) {
-    const textArray = text.split("*");
-    switch(textArray[0]){
-        case "1": 
-            response = Register(textArray, phoneNumber);
-        break;
-        default:
-            response = "END Invalid choice. Please try again";
-    }
-  }
-  else {
-    const textArray = text.split("*");
-    switch (textArray[0]) {
-      case "2":
-         response = SendMoney(textArray, sessionId);
-          break;
-        case "3":
-         response = WithdrawMoney(textArray);
-          break;
-        case "4":
-         response = CheckBalance(textArray);
-          break;
-      default:
-        response = "END Invalid choice. Please try again";
-    }
-  }
-
-
-  // Send the response back to the API
-  res.set("Content-Type: text/plain");
-  res.send(response);
 
 });
 app.listen(PORT, () => {
