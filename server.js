@@ -44,16 +44,12 @@ app.post("/", (req, res) => {
       } else {
 
         // AUTHENTICATION PARAMETERS
-        console.log(userName)
-        console.log(userRegistered)
         userRegistered = true;
         userName = user.name;
+        console.log(userName)
+        console.log(userRegistered)
 
         // MAIN LOGIC 
-         
-
-
-
   if (text == "" && userRegistered == true) {
     response = MainMenu(userName)
    }
