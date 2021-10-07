@@ -1,9 +1,16 @@
 const express = require("express");
-const { MainMenu, Register, SendMoney, WithdrawMoney, CheckBalance, unregisteredMenu } = require('./menu');
+const {
+  MainMenu,
+  Register,
+  SendMoney,
+  WithdrawMoney,
+  CheckBalance,
+  unregisteredMenu,
+} = require("./menu");
 const User = require("./models/user");
 const mongoose = require("mongoose");
 const dotenv = require("dotenv");
-const cors = require("cors")
+const cors = require("cors");
 const app = express();
 const PORT = process.env.PORT || 5000;
 
@@ -25,74 +32,67 @@ mongoose
     console.log("MongoDB Running Successfully");
   })
   .catch((err) => {
-    console.log({err})
+    console.log({ err });
     console.log("MongoDB not Connected ");
   });
 
-
 app.post("/", (req, res) => {
- let userName ;
- let userRegistered;
- let response = '';
-
-
   const { sessionId, serviceCode, phoneNumber, text } = req.body;
   User.findOne({ number: phoneNumber })
     .then((user) => {
+      // AUTHENTICATION VARIABLES
+      let userName;
+      let userRegistered;
+      let response = "";
+
       if (!user) {
         userRegistered = false;
       } else {
-
         // AUTHENTICATION PARAMETERS
         userRegistered = true;
         userName = user.name;
-        console.log(userName)
-        console.log(userRegistered)
+        console.log(userName);
+        console.log(userRegistered);
+      }
 
-        // MAIN LOGIC 
-  if (text == "" && userRegistered == true) {
-    response = MainMenu(userName)
-   }
-   else if ( text == "" && userRegistered == false ) {
-     response = unregisteredMenu()
-   }
-   else if ( text != "" && userRegistered == false ) {
-     const textArray = text.split("*");
-     switch(textArray[0]){
-         case "1": 
-             response = Register(textArray, phoneNumber);
-         break;
-         default:
-             response = "END Invalid choice. Please try again";
-     }
-   }
-   else {
-     const textArray = text.split("*");
-     switch (textArray[0]) {
-       case "1":
-          response = SendMoney(textArray, sessionId);
-           break;
-         case "2":
-          response = WithdrawMoney(textArray);
-           break;
-         case "3":
-          response = CheckBalance(textArray);
-           break;
-       default:
-         response = "END Invalid choice. Please try again";
-     }
-   }
- 
- 
-   // Send the response back to the API
-   res.set("Content-Type: text/plain");
-   res.send(response);
-    }
+      // MAIN LOGIC
+      if (text == "" && userRegistered == true) {
+        response = MainMenu(userName);
+      } else if (text == "" && userRegistered == false) {
+        response = unregisteredMenu();
+      } else if (text != "" && userRegistered == false) {
+        const textArray = text.split("*");
+        switch (textArray[0]) {
+          case "1":
+            response = Register(textArray, phoneNumber);
+            break;
+          default:
+            response = "END Invalid choice. Please try again";
+        }
+      } else {
+        const textArray = text.split("*");
+        switch (textArray[0]) {
+          case "1":
+            response = SendMoney(textArray, sessionId);
+            break;
+          case "2":
+            response = WithdrawMoney(textArray);
+            break;
+          case "3":
+            response = CheckBalance(textArray);
+            break;
+          default:
+            response = "END Invalid choice. Please try again";
+        }
+      }
+
+      // Send the response back to the API
+      res.set("Content-Type: text/plain");
+      res.send(response);
     })
     .catch((err) => {
-    console.log({err})
-    })
-
+      console.log({ err });
+    });
 });
 
 app.listen(PORT, () => {
