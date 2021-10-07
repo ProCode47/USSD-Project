@@ -93,14 +93,17 @@ const menu = {
     } else if (level == 3) {
       return (response = "CON Enter your PIN:");
     } else if (level == 4) {
+      
+      return (response = "CON It is done...my liege");
 
-      async function confirmDetails() {
-        let user = await User.findOne({ number: phoneNumber }).name; // wait until the promise resolves (*)
-        return user
-        console.log("working")
-      }
 
-     return(response = confirmDetails().toString())
+    //   async function confirmDetails() {
+    //     let user = await User.findOne({ number: phoneNumber }).name; // wait until the promise resolves (*)
+    //     return user
+    //     console.log("working")
+    //   }
+
+    //  return(response = confirmDetails().toString())
       // User.findOne({
       //   number: phoneNumber,
       // })
