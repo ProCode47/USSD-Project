@@ -46,7 +46,7 @@ const menu = {
       } else if (pin != confirmPin) {
         return (response = "END Your pins do not match. Please try again");
       } else {
-        let response;
+        let response = "squid game";
         const userData = {
           name: textArray[1],
           number: phoneNumber,
@@ -61,6 +61,7 @@ const menu = {
                 userData.pin = hash;
                 User.create(userData)
                   .then((user) => {
+                    console.log("hit me")
                     response = "END You have been registered";
                   })
                   .catch((err) => {
@@ -79,6 +80,7 @@ const menu = {
           });
         
         return response;
+        console.log({response})
       }
     }
   },
