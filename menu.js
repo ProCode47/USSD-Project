@@ -17,7 +17,7 @@ const menu = {
 
     return response;
   },
-  Register: (textArray, phoneNumber) => {
+  Register: async (textArray, phoneNumber) => {
     const level = textArray.length;
     if (level == 1) {
       let response =
@@ -45,39 +45,26 @@ const menu = {
       } else if (pin != confirmPin) {
         return (response = "END Your pins do not match. Please try again");
       } else {
-        const userData = {
-          name: textArray[1],
-          number: phoneNumber,
-          pin: textArray[3],
-        };
-        User.findOne({
-          number: phoneNumber,
-        })
-          .then((user) => {
-            if (!user) {
-              bcrypt.hash(userData.pin, 10, (err, hash) => {
-                userData.pin = hash;
-                User.create(userData)
-                  .then((user) => {
-                    console.log("hit me");
-                    response = "END You have been registered";
-                  })
-                  .catch((err) => {
-                    console.log({ err });
-                    console.log("hit error");
-                    response = "END An error occurred";
-                  });
-              });
-            } else {
-              response = "END This user has already been registered";
-            }
-          })
-          .catch((err) => {
-            console.log({ err });
-            response = "END An error has ocurred";
-          });
+        let response = "";
+        async function createUser(){ bcrypt.hash(userData.pin, 10, (err, hash) => {
+          userData.pin = hash;
+         let user = await User.create(userData)
+          return user
+        });
+        }
+
+        let user = await createUser()
+
+        if (!user) {
+          response = "END An unexpected error occurred... Please try again later"
+        } else {
+          let userName = user.name;
+        response = `END Congratulations ${userName}, You've been successfully registered with Aza Mobile`;
+        }
+  
+        return response;
         
-        return (response = "CON It is done...my liege");
+       
 
       }
     }

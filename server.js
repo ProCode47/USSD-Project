@@ -64,7 +64,7 @@ app.post("/", (req, res) => {
         const textArray = text.split("*");
         switch (textArray[0]) {
           case "1":
-            response = Register(textArray, phoneNumber);
+            response = await Register(textArray, phoneNumber);
             break;
           default:
             response = "END Invalid choice. Please try again";
