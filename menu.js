@@ -94,46 +94,46 @@ const menu = {
       return (response = "CON Enter your PIN:");
     } else if (level == 4) {
       let response = "";
-      async function confirmDetails() {
-        let user = await User.findOne({ number: phoneNumber }); // wait until the promise resolves (*)
-        console.log(user)
-        return user;
-      }
+      // async function confirmDetails() {
+      //   let user = await User.findOne({ number: phoneNumber }); // wait until the promise resolves (*)
+      //   console.log(user)
+      //   return user;
+      // }
 
-      let user = await confirmDetails().toString()
-      if (!user) {
-        response = "END This receipient does not have an account with Aza Mobile, hence transfers to this number are not eligbile"
-      } else {
-        userName = user.name;
-        receiverMobile = textArray[1];
-      response = `CON You're about to send NGN ${textArray[2]} to ${userName}
-      "1. Confirm
-      "2. Cancel `;
-      }
-
-      return response;
-      // User.findOne({
-      //   number: phoneNumber,
-      // })
-      //   .then(
-      // (user) => {
-      //     if (!user) {
-      //       response = "END This receipient does not have an account with Aza Mobile, hence transfers to this number are not eligbile";
-
-      //     } else {
-      //       userName = user.name;
-      //       receiverMobile = textArray[1];
+      // let user = await confirmDetails().toString()
+      // if (!user) {
+      //   response = "END This receipient does not have an account with Aza Mobile, hence transfers to this number are not eligbile"
+      // } else {
+      //   userName = user.name;
+      //   receiverMobile = textArray[1];
       // response = `CON You're about to send NGN ${textArray[2]} to ${userName}
       // "1. Confirm
       // "2. Cancel `;
-      //     }
-      //     console.log(response)
-      //     return response
+      // }
 
-      //   })
-      //   .catch((err) => {
-      //   console.log({err})
-      //   })
+      // return response;
+      User.findOne({
+        number: phoneNumber,
+      })
+        .then(
+      (user) => {
+          if (!user) {
+            response = "END This receipient does not have an account with Aza Mobile, hence transfers to this number are not eligbile";
+
+          } else {
+            userName = user.name;
+            receiverMobile = textArray[1];
+      response = `CON You're about to send NGN ${textArray[2]} to ${userName}
+      "1. Confirm
+      "2. Cancel `;
+          }
+          console.log(response)
+          return response
+
+        })
+        .catch((err) => {
+        console.log({err})
+        })
     } else if (level == 5 && textArray[4] == 1) {
       //check if PIN is correct
       //send the money
@@ -151,11 +151,11 @@ const menu = {
       return (response = "END Invalid entry");
     }
   },
-  WithdrawMoney: (textArray) => {
+  WithdrawMoney: async (textArray) => {
     let response = "END This service will be available soon...";
     return response;
   },
-  CheckBalance: (textArray) => {
+  CheckBalance: async (textArray) => {
     let response = "END This service will be available soon...";
     return response;
   },
