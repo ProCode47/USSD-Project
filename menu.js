@@ -45,7 +45,6 @@ const menu = {
       } else if (pin != confirmPin) {
         return (response = "END Your pins do not match. Please try again");
       } else {
-        let response = "squid game";
         const userData = {
           name: textArray[1],
           number: phoneNumber,
@@ -77,12 +76,13 @@ const menu = {
             console.log({ err });
             response = "END An error has ocurred";
           });
-        console.log(response);
-        return response;
+        
+        return (response = "CON It is done...my liege");
+
       }
     }
   },
-  SendMoney: (textArray, phoneNumber) => {
+  SendMoney: async (textArray, phoneNumber) => {
     const level = textArray.length;
     let receiverMobile;
     let response;
@@ -93,17 +93,25 @@ const menu = {
     } else if (level == 3) {
       return (response = "CON Enter your PIN:");
     } else if (level == 4) {
-      
-      return (response = "CON It is done...my liege");
+      let response = "";
+      async function confirmDetails() {
+        let user = await User.findOne({ number: phoneNumber }); // wait until the promise resolves (*)
+        console.log(user)
+        return user;
+      }
 
+      let user = await confirmDetails().toString()
+      if (!user) {
+        response = "END This receipient does not have an account with Aza Mobile, hence transfers to this number are not eligbile"
+      } else {
+        userName = user.name;
+        receiverMobile = textArray[1];
+      response = `CON You're about to send NGN ${textArray[2]} to ${userName}
+      "1. Confirm
+      "2. Cancel `;
+      }
 
-    //   async function confirmDetails() {
-    //     let user = await User.findOne({ number: phoneNumber }).name; // wait until the promise resolves (*)
-    //     return user
-    //     console.log("working")
-    //   }
-
-    //  return(response = confirmDetails().toString())
+      return response;
       // User.findOne({
       //   number: phoneNumber,
       // })
