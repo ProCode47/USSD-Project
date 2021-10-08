@@ -40,7 +40,7 @@ app.post("/", (req, res) => {
   const { sessionId, serviceCode, phoneNumber, text } = req.body;
   User.findOne({ number: phoneNumber })
     .then( async (user) => {
-      // AUTHENTICATION VARIABLES
+      // AUTHENTICATION PARAMETERS
       let userName;
       let userRegistered;
       let response = "";
@@ -48,7 +48,6 @@ app.post("/", (req, res) => {
       if (!user) {
         userRegistered = false;
       } else {
-        // AUTHENTICATION PARAMETERS
         userRegistered = true;
         userName = user.name;
       }

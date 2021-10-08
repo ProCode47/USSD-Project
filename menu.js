@@ -1,6 +1,7 @@
 const User = require("./models/user");
-const countryCode = require("./util/countryCode")
+const countryCode = require("./util/countryCode");
 const bcrypt = require("bcrypt");
+
 const menu = {
   MainMenu: (userName) => {
     const response = `CON Welcome ${userName}, which action you wish to perform ?
@@ -37,15 +38,19 @@ const menu = {
     } else if (level == 5) {
       const pin = textArray[3];
       const confirmPin = textArray[4];
+      // Check if the name is strictly alphabets via regex
       if (/[^a-zA-Z]/.test(textArray[1])) {
         return (response =
           "END Your full name must not consist of any number or symbol. Please try again");
-      } else if (pin.toString().length != 5 && isNaN(pin)) {
+      } // Check if the pin is 5 characters long and is purely numerical
+      else if (pin.toString().length != 5 && isNaN(pin)) {
         return (response =
           "END Your pin does not follow our guidelines. Please try again");
-      } else if (pin != confirmPin) {
+      } // Check if the pin and confirmed pin is the same
+      else if (pin != confirmPin) {
         return (response = "END Your pins do not match. Please try again");
       } else {
+        // proceed to register user
         let response = "";
         async function createUser() {
           const userData = {
@@ -53,21 +58,25 @@ const menu = {
             number: phoneNumber,
             pin: textArray[3],
           };
+          // hashes the user pin and updates the userData object
           bcrypt.hash(userData.pin, 10, (err, hash) => {
             userData.pin = hash;
           });
+
+          // create user and register to DB
           let user = await User.create(userData);
           return user;
-
-
         }
 
+        // Assigns the created user to a variable for manipulation
         let user = await createUser();
-
+        // If user creation failed
         if (!user) {
           response =
             "END An unexpected error occurred... Please try again later";
-        } else {
+        }
+        // if user creation was successful
+        else {
           let userName = user.name;
           response = `END Congratulations ${userName}, You've been successfully registered with Aza Mobile`;
         }
@@ -86,17 +95,23 @@ const menu = {
       return (response = "CON Enter your PIN:");
     } else if (level == 4) {
       let response = "";
+
+      // Checks DB for the receivers details and returns the value
       async function confirmDetails() {
-        const userNumber = countryCode(textArray[1])
+        const userNumber = countryCode(textArray[1]);
         let user = await User.findOne({ number: userNumber });
         return user;
       }
 
+      // Assigns the user to a variable for manipulation
       let user = await confirmDetails();
+      // If user was not found in the DB
       if (!user) {
         response =
           "END This receipient does not have an account with Aza Mobile, hence transfers to this number are not eligbile";
-      } else {
+      }
+      // if user was found and details were retrieved
+      else {
         let userName = user.name;
         response = `CON You're about to send NGN ${textArray[2]} to ${userName}
       1. Confirm
@@ -105,13 +120,14 @@ const menu = {
 
       return response;
     } else if (level == 5 && textArray[4] == 1) {
-      //check if PIN is correct
-      //send the money
-      //If the account has enough funds including charges etc..
+      // TODO check if PIN is correct
+      // TODO send the money
+      // TODO If the account has enough funds including charges etc..
+      // TODO connect to DB
+      // TODO Complete transaction
       pin = textArray[3];
       amount = textArray[2];
-      //connect to DB
-      //Complete transaction
+
       return (response =
         "END We are processing your request. You will receive an SMS shortly");
     } else if (level == 5 && textArray[4] == 2) {
