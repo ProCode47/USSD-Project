@@ -82,7 +82,7 @@ const menu = {
       }
     }
   },
-  SendMoney: (textArray, phoneNumber) => {
+  SendMoney: async (textArray, phoneNumber) => {
     const level = textArray.length;
     let receiverMobile;
     let response;
@@ -94,28 +94,25 @@ const menu = {
       return (response = "CON Enter your PIN:");
     } else if (level == 4) {
       let response = "";
-      User.findOne({
-        number: phoneNumber,
-      })
-        .then(
-      (user) => {
-          if (!user) {
-            response = "END This receipient does not have an account with Aza Mobile, hence transfers to this number are not eligbile";
+      async function confirmDetails() {
+        let user = await User.findOne({ number: phoneNumber }); // wait until the promise resolves (*)
+        console.log(user)
+        return user;
+      }
 
-          } else {
-            userName = user.name;
-            receiverMobile = textArray[1];
+      let user = await confirmDetails();
+      if (!user) {
+        response = "END This receipient does not have an account with Aza Mobile, hence transfers to this number are not eligbile"
+      } else {
+        userName = user.name;
+        receiverMobile = textArray[1];
       response = `CON You're about to send NGN ${textArray[2]} to ${userName}
       "1. Confirm
       "2. Cancel `;
-          }
-          console.log(response)
-          return response
+      }
 
-        })
-        .catch((err) => {
-        console.log({err})
-        })
+      return response;
+      
     } else if (level == 5 && textArray[4] == 1) {
       //check if PIN is correct
       //send the money
