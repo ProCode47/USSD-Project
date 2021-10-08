@@ -21,7 +21,7 @@ const menu = {
     const level = textArray.length;
     if (level == 1) {
       let response =
-        "CON You're about to create an account with Aza Mobile Finance PLC. Please endeavour that all the details you give are reliable. Please state your full name:";
+        "CON You're about to create an account with Aza Mobile Finance PLC. Please endeavour that all the details you give are reliable. Please enter your surname:";
       return response;
     } else if (level == 2) {
       let response = `CON This phone number will be used as your account number for transfers, withdrawals and deposits
