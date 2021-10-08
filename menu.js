@@ -133,11 +133,11 @@ const menu = {
       return (response = "END Invalid entry");
     }
   },
-  WithdrawMoney: async function myDisplay() {
+  WithdrawMoney: async (textArray) => {
     let response = "END This service will be available soon...";
     return response;
   },
-  CheckBalance: async function myDisplay() {
+  CheckBalance: async (textArray) => {
     let response = "END This service will be available soon...";
     return response;
   },

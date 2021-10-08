@@ -36,7 +36,7 @@ mongoose
     console.log("MongoDB not Connected ");
   });
 
-app.post("/", (req, res) => {
+app.post("/", async (req, res) => {
   const { sessionId, serviceCode, phoneNumber, text } = req.body;
   User.findOne({ number: phoneNumber })
     .then((user) => {
@@ -73,13 +73,13 @@ app.post("/", (req, res) => {
         const textArray = text.split("*");
         switch (textArray[0]) {
           case "1":
-            response = SendMoney(textArray, phoneNumber);
+            response = await SendMoney(textArray, phoneNumber);
             break;
           case "2":
-            response = WithdrawMoney(textArray);
+            response = await WithdrawMoney(textArray);
             break;
           case "3":
-            response = CheckBalance(textArray);
+            response = await CheckBalance(textArray);
             break;
           default:
             response = "END Invalid choice. Please try again";
