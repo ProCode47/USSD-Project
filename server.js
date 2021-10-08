@@ -36,10 +36,10 @@ mongoose
     console.log("MongoDB not Connected ");
   });
 
-app.post("/", async (req, res) => {
+app.post("/", (req, res) => {
   const { sessionId, serviceCode, phoneNumber, text } = req.body;
   User.findOne({ number: phoneNumber })
-    .then((user) => {
+    .then( async (user) => {
       // AUTHENTICATION VARIABLES
       let userName;
       let userRegistered;
