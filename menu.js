@@ -1,4 +1,5 @@
 const User = require("./models/user");
+const countryCode = require("./util/countryCode")
 const bcrypt = require("bcrypt");
 const menu = {
   MainMenu: (userName) => {
@@ -86,8 +87,8 @@ const menu = {
     } else if (level == 4) {
       let response = "";
       async function confirmDetails() {
-        let user = await User.findOne({ number: textArray[1] }); // wait until the promise resolves (*)
-        console.log(user);
+        const userNumber = countryCode(textArray[1])
+        let user = await User.findOne({ number: userNumber });
         return user;
       }
 
