@@ -47,11 +47,18 @@ const menu = {
       } else {
         let response = "";
         async function createUser() {
+          const userData = {
+            name: textArray[1],
+            number: phoneNumber,
+            pin: textArray[3],
+          };
           bcrypt.hash(userData.pin, 10, (err, hash) => {
             userData.pin = hash;
-            let user = await User.create(userData);
-            return user;
           });
+          let user = await User.create(userData);
+          return user;
+
+
         }
 
         let user = await createUser();
