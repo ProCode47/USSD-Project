@@ -94,24 +94,6 @@ const menu = {
       return (response = "CON Enter your PIN:");
     } else if (level == 4) {
       let response = "";
-      // async function confirmDetails() {
-      //   let user = await User.findOne({ number: phoneNumber }); // wait until the promise resolves (*)
-      //   console.log(user)
-      //   return user;
-      // }
-
-      // let user = await confirmDetails().toString()
-      // if (!user) {
-      //   response = "END This receipient does not have an account with Aza Mobile, hence transfers to this number are not eligbile"
-      // } else {
-      //   userName = user.name;
-      //   receiverMobile = textArray[1];
-      // response = `CON You're about to send NGN ${textArray[2]} to ${userName}
-      // "1. Confirm
-      // "2. Cancel `;
-      // }
-
-      // return response;
       User.findOne({
         number: phoneNumber,
       })
@@ -151,11 +133,11 @@ const menu = {
       return (response = "END Invalid entry");
     }
   },
-  WithdrawMoney: async (textArray) => {
+  WithdrawMoney: async function myDisplay() {
     let response = "END This service will be available soon...";
     return response;
   },
-  CheckBalance: async (textArray) => {
+  CheckBalance: async function myDisplay() {
     let response = "END This service will be available soon...";
     return response;
   },
