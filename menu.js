@@ -82,7 +82,7 @@ const menu = {
       }
     }
   },
-  SendMoney: async (textArray, phoneNumber) => {
+  SendMoney: (textArray, phoneNumber) => {
     const level = textArray.length;
     let receiverMobile;
     let response;
