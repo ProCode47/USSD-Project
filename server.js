@@ -51,8 +51,6 @@ app.post("/", (req, res) => {
         // AUTHENTICATION PARAMETERS
         userRegistered = true;
         userName = user.name;
-        console.log(userName);
-        console.log(userRegistered);
       }
 
       // MAIN LOGIC
