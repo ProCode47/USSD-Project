@@ -46,26 +46,25 @@ const menu = {
         return (response = "END Your pins do not match. Please try again");
       } else {
         let response = "";
-        async function createUser(){ bcrypt.hash(userData.pin, 10, (err, hash) => {
-          userData.pin = hash;
-         let user = await User.create(userData)
-          return user
-        });
+        async function createUser() {
+          bcrypt.hash(userData.pin, 10, (err, hash) => {
+            userData.pin = hash;
+            let user = await User.create(userData);
+            return user;
+          });
         }
 
-        let user = await createUser()
+        let user = await createUser();
 
         if (!user) {
-          response = "END An unexpected error occurred... Please try again later"
+          response =
+            "END An unexpected error occurred... Please try again later";
         } else {
           let userName = user.name;
-        response = `END Congratulations ${userName}, You've been successfully registered with Aza Mobile`;
+          response = `END Congratulations ${userName}, You've been successfully registered with Aza Mobile`;
         }
-  
-        return response;
-        
-       
 
+        return response;
       }
     }
   },
@@ -81,22 +80,22 @@ const menu = {
       let response = "";
       async function confirmDetails() {
         let user = await User.findOne({ number: textArray[1] }); // wait until the promise resolves (*)
-        console.log(user)
+        console.log(user);
         return user;
       }
 
       let user = await confirmDetails();
       if (!user) {
-        response = "END This receipient does not have an account with Aza Mobile, hence transfers to this number are not eligbile"
+        response =
+          "END This receipient does not have an account with Aza Mobile, hence transfers to this number are not eligbile";
       } else {
         let userName = user.name;
-      response = `CON You're about to send NGN ${textArray[2]} to ${userName}
+        response = `CON You're about to send NGN ${textArray[2]} to ${userName}
       1. Confirm
       2. Cancel `;
       }
 
       return response;
-
     } else if (level == 5 && textArray[4] == 1) {
       //check if PIN is correct
       //send the money
