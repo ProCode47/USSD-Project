@@ -78,7 +78,8 @@ const menu = {
         // if user creation was successful
         else {
           let userName = user.name;
-          response = `END Congratulations ${userName}, You've been successfully registered with Aza Mobile`;
+          response = `END Congratulations ${userName}, You've been successfully registered with Aza Mobile
+          Dial *384*33622# to start using our services`;
         }
 
         return response;
